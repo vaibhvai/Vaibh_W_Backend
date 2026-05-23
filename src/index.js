@@ -1,16 +1,23 @@
 import { setDefaultResultOrder } from "dns";
 setDefaultResultOrder("ipv4first");
 import dotenv from "dotenv";
-dotenv.config();   // 🔥 MUST BE FIRST
+dotenv.config(); // 🔥 MUST BE FIRST
 
 import connectDB from "./db/index.js";
+import app from "./app.js";
 
 console.log("ENV CHECK:", process.env.MONGO_URI); // debug
 
-connectDB();
-
-
-
+connectDB()
+  .then(() => {
+    console.log("DB Connected Successfully vaibhavi");
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running on port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("DB Connection Error:", err);
+  });
 
 /*
 import  express from "express";
@@ -34,5 +41,3 @@ const app = express();
     }
 })()
 */
-
-
