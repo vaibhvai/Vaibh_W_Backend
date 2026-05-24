@@ -50,10 +50,13 @@ const userSchema = new Schema(
     timestamps: true,
   },
 );
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next(); /// when user chnage anything e.g avtar etc this time time password has will be always chnage so pto avoid this  condition we are using this condition
+
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) {
+    return; // when user chnage anything e.g avtar etc this time time password has will be always chnage so pto avoid this  condition we are using this condition
+  }
+
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {

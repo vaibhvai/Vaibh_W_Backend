@@ -1,7 +1,6 @@
+import "dotenv/config";
 import { setDefaultResultOrder } from "dns";
 setDefaultResultOrder("ipv4first");
-import dotenv from "dotenv";
-dotenv.config(); // 🔥 MUST BE FIRST
 
 import connectDB from "./db/index.js";
 import app from "./app.js";
