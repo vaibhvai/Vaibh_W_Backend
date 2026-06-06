@@ -10,7 +10,7 @@ console.log("ENV CHECK:", process.env.MONGO_URI); // debug
 connectDB()
   .then(() => {
     console.log("DB Connected Successfully vaibhavi");
-    app.listen(process.env.PORT || 8001, () => {
+    app.listen(process.env.PORT || 8003, () => {
       console.log(`Server is running on port ${process.env.PORT}`);
     });
   })
